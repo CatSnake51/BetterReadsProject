@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 // import { Link } from "react-router-dom";
 import axios from 'axios';
-
+import RevInputs from './RevInputs.jsx';
 
 const CreatePost = () => {
 
@@ -16,7 +16,7 @@ const CreatePost = () => {
   //       })
   // }
 
-  const [name, setName] = useState('');
+  const [user, setUser] = useState('');
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [comments, setComments] = useState('');
@@ -53,7 +53,7 @@ const CreatePost = () => {
     }
 
     //reset input values in form
-    setName('');
+    setUser('');
     setTitle('');
     setAuthor('');
     setComments('');
@@ -65,10 +65,34 @@ const CreatePost = () => {
     setOverallEnjoyability('');
     setTags('');
   }
-//best practice is not to have
+//best practice is not to have an action="http://localhost:3000/"
   return (
     <div id="form-container">
-      <form action="http://localhost:3000/" onSubmit={handleSubmit} id="post-form">
+      <form onSubmit={handleSubmit} id="post-form">
+        <RevInputs name='User' type='text' setFunc={event => setUser(event.target.value)} value={user}/><br/>
+        <RevInputs name='Title' type='text' setFunc={event => setTitle(event.target.value)} value={title}/><br/>
+        <RevInputs name='Author' type='text' setFunc={event => setAuthor(event.target.value)} value={author}/><br/>
+        <RevInputs name='Comments' type='text' setFunc={event => setComments(event.target.value)} value={comments}/><br/>
+        
+        <div className='ratings'> Ratings: <br/>
+        <RevInputs name='Plotline' type='number' setFunc={event => setPlotline(event.target.value)} value={plotline}/><br/>
+        <RevInputs name='Unpredictability' type='number' setFunc={event => setUnpredictability(event.target.value)} value={unpredictability}/><br/>
+        <RevInputs name='Pace' type='number' setFunc={event => setPace(event.target.value)} value={pace}/><br/>
+        <RevInputs name='Writing-Style' type='number' setFunc={event => setWritingStyle(event.target.value)} value={writingStyle}/><br/>
+        <RevInputs name='ending' type='number' setFunc={event => setEnding(event.target.value)} value={ending}/><br/>
+        <RevInputs name='Overall-Enjoyability' type='number' setFunc={event => setOverallEnjoyability(event.target.value)} value={overallEnjoyability}/><br/>
+        <RevInputs name='Tags' type='text' setFunc={event => setTags(event.target.value)} value={tags}/><br/>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  )
+}
+  
+/*
+Past code
+   <div id="form-container">
+      <form onSubmit={handleSubmit} id="post-form">
         Name:<input 
           id="name"
           name="name"
@@ -162,7 +186,6 @@ const CreatePost = () => {
         <button type="submit">Submit form</button>
       </form>
     </div>
-  )
-}
-    
+
+*/
 export default CreatePost;
