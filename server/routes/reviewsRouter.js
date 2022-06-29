@@ -14,4 +14,8 @@ router.post("/", booksController.getBookId, reviewsController.postReviews, tagRe
   res.status(200).json({...res.locals.postedReviews, tags: res.locals.postedTagReview})
 })
 
+router.delete("/:reviewId", reviewsController.deleteReviews, (req, res) => {
+  res.status(200).json({message: 'Successful deletion'})
+})
+
 module.exports = router
