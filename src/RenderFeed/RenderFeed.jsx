@@ -48,7 +48,7 @@ const RenderFeed = () => {
 
   const posts = [];
   postsTestData.forEach((post) => {
-    posts.push(<Posts post={post} id={posts.review_id} key={post.review_id} />);
+    posts.push(<Posts post={post} id={post.review_id} key={post.review_id} />);
   });
 
   return <>{posts}</>;
