@@ -29,7 +29,21 @@ reviewsController.postReviews = async (req, res, next) => {
     return next()
   } catch(err) {
     console.log(err)
-    return next(err)
+    return next({message: err})
+  }
+}
+
+// Deletes a review from the database
+reviewsController.deleteReviews = async (req, res, next) => {
+  try {
+    await db.query(`
+    DELETE FROM review 
+    WHERE review_id = $1
+    `, [req.params.reviewId])
+    return next()
+  } catch(err) {
+    console.log(err)
+    return next({message: err})
   }
 }
 
