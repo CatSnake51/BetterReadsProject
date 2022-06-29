@@ -27,7 +27,7 @@ const CreatePost = () => {
   const handleSubmit = event => {
 
     //post request to add the newly created review to the database
-    axios.post('/', {
+    axios.post('/api/reviews', {
       name: title,
       author: author,
       comments: comments,
