@@ -5,7 +5,7 @@ const booksController = {}
 // Gets a Book ID given the name and author. Creates a new book if not found.
 booksController.getBookId = async (req, res, next) => {
   const { name, author } = req.body
-  if (!name || !author) return next({log: 'invalid author or name'})
+  if (!name || !author) return next({message: {err: 'Invalid author or name supplied in body'}})
   try {
     let data = await db.query(`
     SELECT book_id 
