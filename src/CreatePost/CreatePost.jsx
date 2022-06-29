@@ -4,19 +4,14 @@ import axios from 'axios';
 import RevInputs from './RevInputs.jsx';
 
 const CreatePost = () => {
+  
 
-  // componentDidMount() {
-  //     axios.get('http://localhost:3000/')
-  //       .then( res => {
-  //         // console.log(res.locals.test);
-  //         console.log(res.data);
-  //       })
-  //       .catch(err => {
-  //         console.log(err);
-  //       })
-  // }
+  /* USER STRETCH GOAL (add if we have the time)
+  const [user, setUser] = useState(''); 
+  <RevInputs name='User' type='text' setFunc={event => setUser(event.target.value)} value={user}/><br/>
+  */
 
-  const [user, setUser] = useState('');
+  //The states that represent the different inputs for creating a review
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [comments, setComments] = useState('');
@@ -28,48 +23,52 @@ const CreatePost = () => {
   const [overallEnjoyability, setOverallEnjoyability] = useState('');
   const [tags, setTags] = useState('');
 
-  const handleSubmit = async event => {
-    console.log('handleSubmit ran');
-    event.preventDefault(); //prevents the default behaviour of the browser submitting the form so that we can handle things instead.
+  //function invoke when the submit button is clicked
+  const handleSubmit = event => {
 
-    //send post request to backend
-    const form = event.currentTarget; //gets elements the event handler was attached to
-    const url = form.action; //takes API url from form's action attirbute
+    //post request to add the newly created review to the database
+    axios.post('/', {
+      name: title,
+      author: author,
+      comments: comments,
+      plotline: plotline,
+      unpredictability: unpredictability,
+      pace: pace,
+      writingStyle: writingStyle,
+      ending: ending,
+      overallEnjoyability: overallEnjoyability,
+      tags: tags
+    })
+    .then( function() {
+      console.log(response);
+      if(res.status === 200){
+        //reset the states back to a blank string
 
-    try{
-      const formData = new FormData(form); //takes all the fields in the form and makes their values available through a `FormData` instance
-      console.log("form data: ", formData);
-      formData.tags = formData.tags.split(','); //make tags an array of strings
-      consoel.log("form tags data should be an array: ", formData.tags);
-      header = {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
+        setTitle('');
+        setAuthor('');
+        setComments('');
+        setPlotline('');
+        setUnpredictability('');
+        setPace('');
+        setWritingStyle('');
+        setEnding('');
+        setOverallEnjoyability('');
+        setTags('');
+      } else {
+        console.log(res.status);
       }
-      const responseData = await axios.post(url, formData, header);
-      //edit so we use responseData to change the state to show newly created review.
-      console.log({ responseData });
-    } catch(error){
-      console.error(error);
-    }
-
-    //reset input values in form
-    setUser('');
-    setTitle('');
-    setAuthor('');
-    setComments('');
-    setPlotline('');
-    setUnpredictability('');
-    setPace('');
-    setWritingStyle('');
-    setEnding('');
-    setOverallEnjoyability('');
-    setTags('');
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    event.preventDefault(); //prevents the default behaviour of the browser submitting the form so that we can handle things instead.
   }
+  
 //best practice is not to have an action="http://localhost:3000/"
   return (
     <div id="form-container">
       <form onSubmit={handleSubmit} id="post-form">
-        <RevInputs name='User' type='text' setFunc={event => setUser(event.target.value)} value={user}/><br/>
+        
         <RevInputs name='Title' type='text' setFunc={event => setTitle(event.target.value)} value={title}/><br/>
         <RevInputs name='Author' type='text' setFunc={event => setAuthor(event.target.value)} value={author}/><br/>
         <RevInputs name='Comments' type='text' setFunc={event => setComments(event.target.value)} value={comments}/><br/>

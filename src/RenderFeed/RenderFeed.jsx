@@ -8,6 +8,7 @@ const RenderFeed = () => {
   const postIds = [0, 1, 2];
   const newestPosts = [
     {
+      id: 1,
       name: "user1",
       title: "Catcher in the Rye",
       author: "Salinger",
