@@ -1,105 +1,57 @@
-import React, {useState, useEffect} from 'react';
-const axios = require('axios');
+import React from 'react';
+import Posts from '../Posts/Posts.jsx';
 
+//REMINDER:  -> make GET request in MainContainer and pass data as props to here
+//TODO: Delete test data and if data isn't in an array, store it in one to iterate over and pass as prop to Posts component
 const RenderFeed = () => {
-  const [newestPostIds,setNewestPostIds] = useState([]);
-  // const [newestPosts,setNewestPosts] = useState([]);
-
-  const postIds = [0, 1, 2];
-  const newestPosts = [
+  const postsTestData = [
     {
-      id: 1,
-      name: "user1",
-      title: "Catcher in the Rye",
-      author: "Salinger",
-      comments: "loved it!",
+      review_id: 1,
+      title: 'Catcher in the Rye',
+      author: 'Salinger',
+      comments: 'loved it!',
       plotline: 10,
       unpredictability: 10,
       pace: 10,
       writingStyle: 10,
       ending: 10,
-      overallEnjoyability: 10,
-      tags: ["fiction", "angst"]
+      overall: 10,
+      tags: ['fiction', 'angst'],
     },
     {
-      name: "user2",
-      title: "Harry Potter and the Half Blood Prince",
-      author: "J.K Rowling",
-      comments: "super fun",
+      review_id: 2,
+      title: 'Harry Potter and the Half Blood Prince',
+      author: 'J.K Rowling',
+      comments: 'super fun',
       plotline: 10,
       unpredictability: 6,
       pace: 6,
-      writingStyle: 6,
+      writing_style: 6,
       ending: 2,
-      overallEnjoyability: 9,
-      tags: ['mystery','teenage angst']
+      overall: 9,
+      tags: ['mystery', 'teenage angst'],
     },
     {
-      name: "God",
-      title: "Green Eggs and Ham",
-      author: "Your Mom",
-      comments: "Greatest Book Ever!",
+      review_id: 3,
+      title: 'Green Eggs and Ham',
+      author: 'Your Mom',
+      comments: 'Greatest Book Ever!',
       plotline: 10,
       unpredictability: 10,
       pace: 10,
-      writingStyle: 10,
+      writing_style: 10,
       ending: 10,
-      overallEnjoyability: 10,
-      tags: ['mystery','action','love']
-    }
-  ]
-//after newestPostIds is called, the function inside useEffect is invoke. It combines componentDidMount and componentDidUpdate
+      overall: 10,
+      tags: ['mystery', 'action', 'love'],
+    },
+  ];
 
-//need to make it a state if you want it to be remember
-  // useEffect(() => {
-  //   setNewestPostIds(postIds);
-  //   setNewestPosts(postsData); 
-  // }, [newestPostIds])
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     await axios.get('http://localhost:3000/')
-  //       .then( res => {
-  //         // setNewestPostIds(res.data.postIds);
-  //         // setNewestPosts(res.data.posts);
-  //       })
-  //   }
-
-  //   const timeOut = setTimeout(() => {
-  //     fetchData();
-  //   }, 5000);
-  
-  //   return () => clearTimeout(timeOut);  
-  // }, [newestPostIds])
-
-  //parses newestPosts and creates jsx elements to render
   const posts = [];
-    for(let i = 0; i < 3; i++) {
-      const tempTags = newestPosts[i].tags.join(", ");
-      posts.push(
-      <div id="post">
-        <p>Name: {newestPosts[i].name}</p> <br/>
-        <p>Title: {newestPosts[i].title}</p> <br/>
-        <p>Author: {newestPosts[i].author}</p> <br/>
-        <p>Comments: {newestPosts[i].comments}</p> <br/>
-        <ul id="ratings">
-          <li>Plotline: {newestPosts[i].comments}</li>
-          <li>Unpredictability: {newestPosts[i].unpredictability}</li>
-          <li>Pace: {newestPosts[i].pace}</li>
-          <li>Writing Style: {newestPosts[i].writingStyle}</li>
-          <li>Ending: {newestPosts[i].ending}</li>
-          <li>Overall Enjoyability: {newestPosts[i].overallEnjoyability}</li>
-        </ul>
-        <p>Tags: {tempTags}</p><br/>
-      </div>
-      );
-    }
+  postsTestData.forEach((post) => {
+    posts.push(<Posts post={post} id={post.review_id} key={post.review_id} />);
+  });
 
-  return (
-    <div className="render-feed">
-      {posts}
-    </div>
-  )
-}
+  return <>{posts}</>;
+};
 
 export default RenderFeed;
