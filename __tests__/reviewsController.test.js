@@ -36,7 +36,7 @@ describe('/api/reviews', () => {
       }
     })
     
-    xit('sends an object on successful response with existing author', async () => {
+    it('sends an object on successful response with existing author', async () => {
       const res = await request(server)
         .post('/api/reviews')
         .send(data)
@@ -49,6 +49,7 @@ describe('/api/reviews', () => {
       
     })
 
+    //TODO write route for deleting books
     xit('sends an object on successful response with nonexisting author', async () => {
       data.name = 'Test Name'
       data.author = 'Test Author'
@@ -82,6 +83,7 @@ describe('/api/reviews', () => {
 describe('/api/reviews/:reviewId', () => {
    
    describe('DELETE', () => {
+
      it('returns an error if review_id is not found', async () => {
       let res = await request(server)
       //test for an id that doesnt exist
@@ -90,7 +92,30 @@ describe('/api/reviews/:reviewId', () => {
         .expect(400)
       expect(res.body).toEqual({err: 'Review is not found'})
      })
-     it('returns an ')
+
+     it('returns a successful response when deleted', async () => {
+        let data = {
+          name: "The BFG",
+          author: 'Ronald Dahl',
+          comments: 'Made from testing file',
+          plotline: 8,
+          unpredictability: 4,
+          pace: 9,
+          writing_style: 2,
+          ending: 1,
+          overall: 6
+        }
+       
+       //Makes a new row in reviews
+        let postRes = await request(server)
+          .post('/api/reviews')
+          .send(data)
+        //Deletes the recently created row from reviews
+        let res = await request(server)
+          .delete(`/api/reviews/${postRes.body.review_id}`)
+          .expect('Content-Type', /application\/json/)
+          .expect(200)
+        expect(res.body).toEqual({ message: 'Successful deletion' })
+     })
    })
-  
 })
