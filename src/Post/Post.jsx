@@ -1,9 +1,19 @@
+import axios from 'axios';
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 //TODO: make sure that the value matches with data received from database
-const Post = ({ post }) => {
+const Post = ({ post, handleDelete }) => {
   // console.log('POSTS', post);
+  const handleSubmit = async () => {
+    try {
+      const result = await axios.delete(`/api/reviews/${post.review_id}`);
+      handleDelete(post.review_id);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="render-feed">
       <div id="post">
@@ -20,7 +30,14 @@ const Post = ({ post }) => {
           <li>Ending: {post.ending}</li>
           <li>Overall: {post.overall}</li>
         </ul>
-        {/* <p>Tags: {post.tags.join(', ')}</p> */}
+        {post.tags ? (
+          <p>Tags: {post.tags.split(',').join(', ')}</p>
+        ) : (
+          <p>Tags:</p>
+        )}
+        <button className="button1" onClick={handleSubmit}>
+          Delete
+        </button>
         <br />
       </div>
     </div>
@@ -48,7 +65,7 @@ Post.propTypes = {
     ending: PropTypes.number,
     /** Overall rating of the book */
     overall: PropTypes.number,
-  })
-}
+  }),
+};
 
 export default Post;
