@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import Post from '../Post/Post.jsx';
+import React from 'react';
 import PropTypes from 'prop-types';
+import Post from '../Post/Post.jsx';
 
 //REMINDER:  -> make GET request in MainContainer and pass data as props to here
 //TODO: Delete test data and if data isn't in an array, store it in one to iterate over and pass as prop to Posts component
