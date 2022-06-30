@@ -1,15 +1,14 @@
-import React from 'react';
-import Posts from '../Posts/Posts.jsx';
+import React, { useState } from 'react';
+import Posts from '../Post/Post.jsx';
 
 //REMINDER:  -> make GET request in MainContainer and pass data as props to here
 //TODO: Delete test data and if data isn't in an array, store it in one to iterate over and pass as prop to Posts component
-const RenderFeed = ({ posts }) => {
+const RenderFeed = ({ posts, handleDelete }) => {
   // console.log(posts);
-
   const postArr = [];
-  posts.forEach((post) => {
+  posts.forEach((post, i) => {
     postArr.push(
-      <Posts post={post} id={post.review_id} key={post.review_id} />
+      <Posts post={post} key={post.review_id} handleDelete={handleDelete} />
     );
   });
 
