@@ -4,7 +4,7 @@ const server = 'http://localhost:3000'
 
 const conditionalBruteForce = {}
 
-describe('/api/reviews', () => {
+xdescribe('/api/reviews', () => {
   describe('GET', () => {
     //it has json in the reviewRouter
     it('sends back response', () => {
@@ -80,7 +80,7 @@ describe('/api/reviews', () => {
 })
 
 
-describe('/api/reviews/:reviewId', () => {
+xdescribe('/api/reviews/:reviewId', () => {
    
    describe('DELETE', () => {
 
