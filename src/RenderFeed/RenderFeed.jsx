@@ -1,5 +1,6 @@
 import React from 'react';
-import Posts from '../Posts/Posts.jsx';
+import PropTypes from 'prop-types'
+import Post from '../Post/Post.jsx';
 
 //REMINDER:  -> make GET request in MainContainer and pass data as props to here
 //TODO: Delete test data and if data isn't in an array, store it in one to iterate over and pass as prop to Posts component
@@ -9,53 +10,25 @@ const RenderFeed = ({ posts }) => {
   const postArr = [];
   posts.forEach((post) => {
     postArr.push(
-      <Posts post={post} id={post.review_id} key={post.review_id} />
+      <Post post={post} id={post.review_id} key={post.review_id} />
     );
   });
 
-  return <>{postArr}</>;
+  return (
+    <React.Fragment>
+      {postArr}
+    </React.Fragment>
+  )
 };
 
-export default RenderFeed;
+RenderFeed.propTypes = {
+  /** Array of post objects to be rendered */
+  posts: PropTypes.array
+}
 
-// const postsTestData = [
-//   {
-//     review_id: 1,
-//     title: 'Catcher in the Rye',
-//     author: 'Salinger',
-//     comments: 'loved it!',
-//     plotline: 10,
-//     unpredictability: 10,
-//     pace: 10,
-//     writingStyle: 10,
-//     ending: 10,
-//     overall: 10,
-//     tags: ['fiction', 'angst'],
-//   },
-//   {
-//     review_id: 2,
-//     title: 'Harry Potter and the Half Blood Prince',
-//     author: 'J.K Rowling',
-//     comments: 'super fun',
-//     plotline: 10,
-//     unpredictability: 6,
-//     pace: 6,
-//     writing_style: 6,
-//     ending: 2,
-//     overall: 9,
-//     tags: ['mystery', 'teenage angst'],
-//   },
-//   {
-//     review_id: 3,
-//     title: 'Green Eggs and Ham',
-//     author: 'Your Mom',
-//     comments: 'Greatest Book Ever!',
-//     plotline: 10,
-//     unpredictability: 10,
-//     pace: 10,
-//     writing_style: 10,
-//     ending: 10,
-//     overall: 10,
-//     tags: ['mystery', 'action', 'love'],
-//   },
-// ];
+RenderFeed.defaultProps = {
+  posts: []
+}
+
+
+export default RenderFeed;
