@@ -12,17 +12,17 @@ value has the state each specific input changes
 const RevInputs = (props) => {
   return (
     <label>
-      {props.name.split('-').join(' ') +' :'}<input 
-      id={'submit' + props.name}
-      name={props.name}
-      type={props.type}
-      onChange={props.setFunc}
-      value={props.value}
-      required
+      {props.name.split('-').join(' ') + ' :'}
+      <input
+        id={'submit' + props.name}
+        name={props.name}
+        type={props.type}
+        onChange={props.setFunc}
+        value={props.value}
+        required
       />
-      
     </label>
-  )
-}
+  );
+};
 
 export default RevInputs;

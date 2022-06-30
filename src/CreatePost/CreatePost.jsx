@@ -24,26 +24,26 @@ const CreatePost = () => {
   const [tags, setTags] = useState('');
 
   //function invoke when the submit button is clicked
-  const handleSubmit = event => {
-
-    //post request to add the newly created review to the database
-    axios.post('/api/reviews', {
-      name: title,
-      author: author,
-      comments: comments,
-      plotline: plotline,
-      unpredictability: unpredictability,
-      pace: pace,
-      writingStyle: writingStyle,
-      ending: ending,
-      overallEnjoyability: overallEnjoyability,
-      tags: tags
-    })
-    .then( function() {
-      console.log(response);
-      if(res.status === 200){
-        //reset the states back to a blank string
-
+  const handleSubmit = async (event) => {
+    try {
+      const response = await axios.post('/api/reviews', {
+        name: title,
+        author: author,
+        comments: comments,
+        plotline: plotline,
+        unpredictability: unpredictability,
+        pace: pace,
+        writing_style: writingStyle,
+        ending: ending,
+        overall: overallEnjoyability,
+        tags: tags
+      })
+  
+      if(response.status === 200){
+        //post request to add the newly created review to the database
+        //post = response.data
+        console.log(response);
+  
         setTitle('');
         setAuthor('');
         setComments('');
@@ -54,14 +54,12 @@ const CreatePost = () => {
         setEnding('');
         setOverallEnjoyability('');
         setTags('');
-      } else {
-        console.log(res.status);
       }
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-    event.preventDefault(); //prevents the default behaviour of the browser submitting the form so that we can handle things instead.
+    } catch(err) {
+      console.log(err);
+    }
+    //prevents the default behaviour of the browser submitting the form so that we can handle things instead.
+    event.preventDefault();
   }
   
 //best practice is not to have an action="http://localhost:3000/"
