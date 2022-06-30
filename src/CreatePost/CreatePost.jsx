@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 // import { Link } from "react-router-dom";
 import axios from 'axios';
 import RevInputs from './RevInputs.jsx';
-import { unstable_renderSubtreeIntoContainer } from "react-dom";
 import Multiselect from 'multiselect-react-dropdown';
 
 
@@ -14,6 +13,7 @@ const CreatePost = () => {
   <RevInputs name='User' type='text' setFunc={event => setUser(event.target.value)} value={user}/><br/>
   */
 
+  const [enumTags, setEnumTags] = useState([])
   //The states that represent the different inputs for creating a review
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
@@ -26,18 +26,6 @@ const CreatePost = () => {
   const [overallEnjoyability, setOverallEnjoyability] = useState('');
   const [tags, setTags] = useState([]);
   
-/*
-  const handleChangeTags = () => {
-    var options = e.target.options;
-    const arrayOfTags = [];
-    options.forEach(option => {
-      if(option.selected){
-        arrayOfTags.push(option.value)
-      }
-    })
-    useTags(arrayOfTags);
-  }
-*/
   //function invoke when the submit button is clicked
   const handleSubmit = async (event) => {
     try {
@@ -76,25 +64,17 @@ const CreatePost = () => {
     //prevents the default behaviour of the browser submitting the form so that we can handle things instead.
     event.preventDefault();
   }
-  //options for the multiselect
-  const options = [
-    'action',
-    'angst',
-    'classics',
-    'comics/graphic novels',
-    'fantasy',
-    'historical fiction',
-    'horror',
-    'mystery',
-    'nonfiction',
-    'romance',
-   'science fiction',
-    'fan',
-    'thrillers'
-  ]
+ 
+  useEffect(() => {
+    async function getTags() {
+      const data = await axios.get('/api/tags')
+      setEnumTags(data.data)
+    }
+    getTags()
+  }, [])
 
   const onSelect = (selectedList, selectedItem)=> {
-    setTags(selectedList);
+    setTags([...tags, selectedItem.tag_id]);
   }
 
 
@@ -116,9 +96,9 @@ const CreatePost = () => {
         <RevInputs name='Overall-Enjoyability' type='number' setFunc={event => setOverallEnjoyability(event.target.value)} value={overallEnjoyability}/><br/>
 
         <Multiselect 
-          isObject={false}
-          options={options}
+          options={enumTags}
           onSelect={onSelect}
+          displayValue='name'
         />
         
         </div>
