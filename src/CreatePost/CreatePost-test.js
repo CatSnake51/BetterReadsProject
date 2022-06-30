@@ -11,13 +11,22 @@ describe('Testing component CreatePost', () => {
 
   //render the compoenent to test it
   beforeAll(() => {
-    const create = render(<CreatePost /*{...props}*/ />)
-    //set some test props?
+    const create = render(<CreatePost/>)
     
   }); 
 
+  afterEach(() => {
+    create = null;
+  });
 
-  test('input box should reset to back after clicking submit', () => {
+  it('the input textbox should show what we type in', () => {
+    const text = 'testing';
+    userEvent.type(screen.getByRole('textbox'), text);
+    expect(screen.getByRole('textbox')).toHaveValue(text);
+  })
+
+
+  it('input box should reset to back to being empty after clicking the submit button', () => {
     //input text
     userEvent.type(screen.ByTestId('submitUser'), 'test');
     userEvent.type(screen.ByTestId('submitTitle'), 'test');
@@ -30,14 +39,18 @@ describe('Testing component CreatePost', () => {
     userEvent.type(screen.ByTestId('SubmitWritingStyle'), '1');
     userEvent.type(screen.ByTestId('SubmitEnding'), '1');
     userEvent.type(screen.ByTestId('SubmitOverallEnjoyability'), '1');
-
+    //click the submit button
     userEvent.click(screen.getByText('Submit'))
 
     expect(screen.findAllBy('textbox')).toHaveValue('');
 
   })
 
-  test('test that post request is sending the right info', async () => {
+  xit('Check if it has options for tags', () => {
+    
+  })
+
+  xit('test that post request is sending the right info', async () => {
 
   })
 
