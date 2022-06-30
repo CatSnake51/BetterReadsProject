@@ -26,6 +26,4 @@ booksController.getBookId = async (req, res, next) => {
   }
 }
 
-
-
 module.exports = booksController
