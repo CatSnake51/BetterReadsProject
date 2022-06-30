@@ -1,9 +1,9 @@
 import axios from 'axios';
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 //TODO: make sure that the value matches with data received from database
-const Posts = ({ post, handleDelete }) => {
+const Post = ({ post, handleDelete }) => {
   // console.log('POSTS', post);
   const handleSubmit = async () => {
     try {
@@ -44,7 +44,7 @@ const Posts = ({ post, handleDelete }) => {
   );
 };
 
-Posts.propTypes = {
+Post.propTypes = {
   /** Information about the post */
   post: PropTypes.shape({
     /** Name of book */
@@ -65,7 +65,7 @@ Posts.propTypes = {
     ending: PropTypes.number,
     /** Overall rating of the book */
     overall: PropTypes.number,
-  })
-}
+  }),
+};
 
-export default Posts;
+export default Post;

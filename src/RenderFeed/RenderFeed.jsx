@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import Posts from '../Post/Post.jsx';
+import Post from '../Post/Post.jsx';
+import PropTypes from 'prop-types';
 
 //REMINDER:  -> make GET request in MainContainer and pass data as props to here
 //TODO: Delete test data and if data isn't in an array, store it in one to iterate over and pass as prop to Posts component
@@ -8,7 +9,7 @@ const RenderFeed = ({ posts, handleDelete }) => {
   const postArr = [];
   posts.forEach((post, i) => {
     postArr.push(
-      <Posts post={post} key={post.review_id} handleDelete={handleDelete} />
+      <Post post={post} key={post.review_id} handleDelete={handleDelete} />
     );
   });
 
