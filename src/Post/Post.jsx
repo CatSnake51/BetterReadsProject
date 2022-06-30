@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React from 'react';
+import PropTypes from 'prop-types'
 
 //TODO: make sure that the value matches with data received from database
 const Posts = ({ post, handleDelete }) => {
@@ -42,5 +43,29 @@ const Posts = ({ post, handleDelete }) => {
     </div>
   );
 };
+
+Posts.propTypes = {
+  /** Information about the post */
+  post: PropTypes.shape({
+    /** Name of book */
+    name: PropTypes.string,
+    /** Name of author */
+    author: PropTypes.string,
+    /** Comments about the book */
+    comments: PropTypes.string,
+    /** Rating 1-10 of the plotline */
+    plotline: PropTypes.number,
+    /** Rating 1-10 of the unpredicatability */
+    unpredictability: PropTypes.number,
+    /** Rating 1-10 of the pace */
+    pace: PropTypes.number,
+    /** Rating 1-10 of the writing style */
+    writing_style: PropTypes.number,
+    /** Rating 1-10 of the ending */
+    ending: PropTypes.number,
+    /** Overall rating of the book */
+    overall: PropTypes.number,
+  })
+}
 
 export default Posts;
