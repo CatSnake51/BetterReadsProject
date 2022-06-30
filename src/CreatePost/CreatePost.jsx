@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 // import { Link } from "react-router-dom";
 import axios from 'axios';
 import RevInputs from './RevInputs.jsx';
+import { unstable_renderSubtreeIntoContainer } from "react-dom";
+import Multiselect from 'multiselect-react-dropdown';
+
 
 const CreatePost = () => {
   
@@ -21,8 +24,20 @@ const CreatePost = () => {
   const [writingStyle, setWritingStyle] = useState('');
   const [ending, setEnding] = useState('');
   const [overallEnjoyability, setOverallEnjoyability] = useState('');
-  const [tags, setTags] = useState('');
-
+  const [tags, setTags] = useState([]);
+  
+/*
+  const handleChangeTags = () => {
+    var options = e.target.options;
+    const arrayOfTags = [];
+    options.forEach(option => {
+      if(option.selected){
+        arrayOfTags.push(option.value)
+      }
+    })
+    useTags(arrayOfTags);
+  }
+*/
   //function invoke when the submit button is clicked
   const handleSubmit = async (event) => {
     try {
@@ -61,7 +76,28 @@ const CreatePost = () => {
     //prevents the default behaviour of the browser submitting the form so that we can handle things instead.
     event.preventDefault();
   }
-  
+  //options for the multiselect
+  const options = [
+    {name: 'action', id: 'action'},
+    {name: 'angst', id: 'angst'},
+    {name: 'classics', id: 'classics'},
+    {name: 'comics/Graphic Novels', id: 'comic'},
+    {name: 'fantasy', id: 'fantasy'},
+    {name: 'historical fiction', id: 'historical'},
+    {name: 'horror', id: 'horror'},
+    {name: 'mystery', id: 'mystery'},
+    {name: 'nonfiction', id: 'nonfiction'},
+    {name: 'romance', id: 'romance'},
+    {name: 'science fiction', id: 'science fiction'},
+    {name: 'fan', id: 'action'},
+    {name: 'thrillers', id: 'thrillers'},
+  ]
+
+  const onSelect = (selectedList, selectedItem)=> {
+    setTags(selectedList);
+  }
+
+
 //best practice is not to have an action="http://localhost:3000/"
   return (
     <div id="form-container">
@@ -78,7 +114,29 @@ const CreatePost = () => {
         <RevInputs name='Writing-Style' type='number' setFunc={event => setWritingStyle(event.target.value)} value={writingStyle}/><br/>
         <RevInputs name='ending' type='number' setFunc={event => setEnding(event.target.value)} value={ending}/><br/>
         <RevInputs name='Overall-Enjoyability' type='number' setFunc={event => setOverallEnjoyability(event.target.value)} value={overallEnjoyability}/><br/>
-        <RevInputs name='Tags' type='text' setFunc={event => setTags(event.target.value)} value={tags}/><br/>
+
+        <Multiselect 
+          options={options}
+          onSelect={onSelect}
+          displayValue="name"
+        />
+        {/*
+        <label for="tags">Tags:</label>
+        <select name="tags" id="submitTags" multiple onChange={handleChangeTags} value={tags}>
+          <option value="action">Action/Adventure</option>
+          <option value="angst">Angst</option>
+          <option value="classics">Classics</option>
+          <option value="comics">Comics/Graphic Novels</option>
+          <option value="fantasy">Fantasy</option>
+          <option value="historical-fiction">Historical Fiction</option>
+          <option value="horror">Horror</option>
+          <option value="mystery">Mystery</option>
+          <option value="Nonfiction">Nonfiction</option>
+          <option value="Romance">Romance</option>  
+          <option value="ScieFi">Science Fiction</option>
+          <option value="thrillers">Thriller</option>
+        </select>
+  */}
         </div>
         <button type="submit">Submit</button>
       </form>
