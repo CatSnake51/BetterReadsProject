@@ -1,58 +1,68 @@
+:root {
+  --font-size: medium;
+  --purple: #5E498C;
+  --light-blue: #D8F0F2;
+  --pale-sage: #D9C877;
+  --sage: #736B46;
+  --off-green: #D9C68F;
+}
+
 * {
-  margin: 0px 0px; 
+  margin: 0px 0px;
+  /* writing-mode: vertical-rl; */
   padding: 0px 0px;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: var(--font-size)
 }
 
 body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: white;
+  background-color: var(--sage);
 }
 
-h1 {
-  color: #815b4c;
-  font-family: 'Playfair Display';
-  text-align: center;
-}
-
-#app {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
 #form-container {
-  background-color: #e2bd62;
-  color: black;
-  border-style: solid;
-  border-color: black;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  background-color: var(--pale-sage);
+  color: rgb(15, 9, 9);
+  border-style: groove;
+  border-color: var(--navy);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-  margin: 0px 0px;
-  padding: 0px 0px;
+  min-width: 600px;
+  max-width: 700px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+  letter-spacing: 3px;
 }
+
+.render-feed {
+  letter-spacing: 2px;
+  min-width: 600px;
+}
+
+.button1 {
+  background-color: var(--purple);
+  color: whitesmoke;
+  border-radius: 6px;
+  padding: 4px;
+}
+
+#form-container label {
+  padding: 40px 10px;
+}
+
 #post {
-  /* background-color: orange; */
-  background-color: #e2bd62;
-  color: black;
-  border-style: solid;
-  border-color: black;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  background-color: var(--light-blue);
+  color: var(--navy);
+  border-style: none;
+  border-color: var(--navy);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-  margin: 0px 0px;
-  padding: 0px 0px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin: 10px;
+  padding: 20px;
 }
 
 li {
-    list-style: none;
-    text-align: center;
+  list-style: none;
+  text-align: center;
 }

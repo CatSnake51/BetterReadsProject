@@ -6,7 +6,7 @@ import Multiselect from 'multiselect-react-dropdown';
 import RevInputs from '../RevInputs/RevInputs.jsx';
 
 const CreatePost = () => {
-  
+
 
   /* USER STRETCH GOAL (add if we have the time)
   const [user, setUser] = useState(''); 
@@ -25,7 +25,7 @@ const CreatePost = () => {
   const [ending, setEnding] = useState('');
   const [overallEnjoyability, setOverallEnjoyability] = useState('');
   const [tags, setTags] = useState([]);
-  
+
   //function invoke when the submit button is clicked
   const handleSubmit = async (event) => {
     try {
@@ -41,12 +41,12 @@ const CreatePost = () => {
         overall: overallEnjoyability,
         tags: tags
       })
-  
-      if(response.status === 200){
+
+      if (response.status === 200) {
         //post request to add the newly created review to the database
         //post = response.data
         console.log(response);
-  
+
         setTitle('');
         setAuthor('');
         setComments('');
@@ -58,13 +58,13 @@ const CreatePost = () => {
         setOverallEnjoyability('');
         setTags('');
       }
-    } catch(err) {
+    } catch (err) {
       console.log(err);
     }
     //prevents the default behaviour of the browser submitting the form so that we can handle things instead.
     event.preventDefault();
   }
- 
+
   useEffect(() => {
     async function getTags() {
       const data = await axios.get('/api/tags')
@@ -73,39 +73,38 @@ const CreatePost = () => {
     getTags()
   }, [])
 
-  const onSelect = (selectedList, selectedItem)=> {
+  const onSelect = (selectedList, selectedItem) => {
     setTags([...tags, selectedItem.tag_id]);
   }
 
 
-//best practice is not to have an action="http://localhost:3000/"
+  //best practice is not to have an action="http://localhost:3000/"
   return (
     <div id="form-container">
       <form onSubmit={handleSubmit} id="post-form">
-        
-        <RevInputs name='Title' type='text' setFunc={event => setTitle(event.target.value)} value={title}/><br/>
-        <RevInputs name='Author' type='text' setFunc={event => setAuthor(event.target.value)} value={author}/><br/>
-        <RevInputs name='Comments' type='text' setFunc={event => setComments(event.target.value)} value={comments}/><br/>
-        
-        <div className='ratings'> Ratings: <br/>
-        <RevInputs name='Plotline' type='number' setFunc={event => setPlotline(event.target.value)} value={plotline}/><br/>
-        <RevInputs name='Unpredictability' type='number' setFunc={event => setUnpredictability(event.target.value)} value={unpredictability}/><br/>
-        <RevInputs name='Pace' type='number' setFunc={event => setPace(event.target.value)} value={pace}/><br/>
-        <RevInputs name='Writing-Style' type='number' setFunc={event => setWritingStyle(event.target.value)} value={writingStyle}/><br/>
-        <RevInputs name='ending' type='number' setFunc={event => setEnding(event.target.value)} value={ending}/><br/>
-        <RevInputs name='Overall-Enjoyability' type='number' setFunc={event => setOverallEnjoyability(event.target.value)} value={overallEnjoyability}/><br/>
 
-        <Multiselect 
-          options={enumTags}
-          onSelect={onSelect}
-          displayValue='name'
-        />
-        
+        <RevInputs name='Title' type='text' setFunc={event => setTitle(event.target.value)} value={title} /><br />
+        <RevInputs name='Author' type='text' setFunc={event => setAuthor(event.target.value)} value={author} /><br />
+        <RevInputs name='Comments' type='text' setFunc={event => setComments(event.target.value)} value={comments} /><br />
+
+        <div className='ratings'> Ratings: <br />
+          <RevInputs name='Plotline' type='number' setFunc={event => setPlotline(event.target.value)} value={plotline} /><br />
+          <RevInputs name='Unpredictability' type='number' setFunc={event => setUnpredictability(event.target.value)} value={unpredictability} /><br />
+          <RevInputs name='Pace' type='number' setFunc={event => setPace(event.target.value)} value={pace} /><br />
+          <RevInputs name='Writing-Style' type='number' setFunc={event => setWritingStyle(event.target.value)} value={writingStyle} /><br />
+          <RevInputs name='ending' type='number' setFunc={event => setEnding(event.target.value)} value={ending} /><br />
+          <RevInputs name='Overall-Enjoyability' type='number' setFunc={event => setOverallEnjoyability(event.target.value)} value={overallEnjoyability} /><br />
+
+          <Multiselect
+            options={enumTags}
+            onSelect={onSelect}
+            displayValue='name'
+          />
+
         </div>
-        <button type="submit">Submit</button>
+        <button className="button1" type="submit">Submit</button>
       </form>
     </div>
   )
 }
-  
 export default CreatePost;

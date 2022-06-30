@@ -1,4 +1,5 @@
 import React from 'react';
+import './RenderFeed.css'
 import PropTypes from 'prop-types';
 import Post from '../Post/Post.jsx';
 
@@ -13,7 +14,7 @@ const RenderFeed = ({ posts, handleDelete }) => {
     );
   });
 
-  return <React.Fragment>{postArr}</React.Fragment>;
+  return <div className="post-container">{postArr}</div>;
 };
 
 RenderFeed.propTypes = {
