@@ -78,19 +78,19 @@ const CreatePost = () => {
   }
   //options for the multiselect
   const options = [
-    {name: 'action', id: 'action'},
-    {name: 'angst', id: 'angst'},
-    {name: 'classics', id: 'classics'},
-    {name: 'comics/Graphic Novels', id: 'comic'},
-    {name: 'fantasy', id: 'fantasy'},
-    {name: 'historical fiction', id: 'historical'},
-    {name: 'horror', id: 'horror'},
-    {name: 'mystery', id: 'mystery'},
-    {name: 'nonfiction', id: 'nonfiction'},
-    {name: 'romance', id: 'romance'},
-    {name: 'science fiction', id: 'science fiction'},
-    {name: 'fan', id: 'action'},
-    {name: 'thrillers', id: 'thrillers'},
+    'action',
+    'angst',
+    'classics',
+    'comics/graphic novels',
+    'fantasy',
+    'historical fiction',
+    'horror',
+    'mystery',
+    'nonfiction',
+    'romance',
+   'science fiction',
+    'fan',
+    'thrillers'
   ]
 
   const onSelect = (selectedList, selectedItem)=> {
@@ -116,27 +116,11 @@ const CreatePost = () => {
         <RevInputs name='Overall-Enjoyability' type='number' setFunc={event => setOverallEnjoyability(event.target.value)} value={overallEnjoyability}/><br/>
 
         <Multiselect 
+          isObject={false}
           options={options}
           onSelect={onSelect}
-          displayValue="name"
         />
-        {/*
-        <label for="tags">Tags:</label>
-        <select name="tags" id="submitTags" multiple onChange={handleChangeTags} value={tags}>
-          <option value="action">Action/Adventure</option>
-          <option value="angst">Angst</option>
-          <option value="classics">Classics</option>
-          <option value="comics">Comics/Graphic Novels</option>
-          <option value="fantasy">Fantasy</option>
-          <option value="historical-fiction">Historical Fiction</option>
-          <option value="horror">Horror</option>
-          <option value="mystery">Mystery</option>
-          <option value="Nonfiction">Nonfiction</option>
-          <option value="Romance">Romance</option>  
-          <option value="ScieFi">Science Fiction</option>
-          <option value="thrillers">Thriller</option>
-        </select>
-  */}
+        
         </div>
         <button type="submit">Submit</button>
       </form>
@@ -144,103 +128,4 @@ const CreatePost = () => {
   )
 }
   
-/*
-Past code
-   <div id="form-container">
-      <form onSubmit={handleSubmit} id="post-form">
-        Name:<input 
-          id="name"
-          name="name"
-          type="text"
-          onChange={event => setName(event.target.value)}
-          value={name}
-          required
-        /> <br/>
-        Title:<input 
-          id="title"
-          name="title"
-          type="text"
-          onChange={event => setTitle(event.target.value)}
-          value={title}
-          required
-        /><br/>
-        Author: <input 
-          id="author"
-          name="author"
-          type="text"
-          onChange={event => setAuthor(event.target.value)}
-          value={author}
-          required
-        /><br/>
-        Comments: <input 
-          id="caption"
-          name="caption"
-          type="text"
-          onChange={event => setComments(event.target.value)}
-          value={comments}
-          required
-        /><br/>
-        <div className='ratings'> Ratings: <br/>
-          Plotline: <input 
-            id="plotline"
-            name="plotline"
-            type="number"
-            onChange={event => setPlotline(event.target.value)}
-            value={plotline}
-            required
-          /><br/>
-          Unpredictability: <input 
-            id="unpredictability"
-            name="unpredictability"
-            type="text"
-            onChange={event => setUnpredictability(event.target.value)}
-            value={unpredictability}
-            required
-          /> <br/>
-          Pace: <input 
-            id="pace"
-            name="pace"
-            type="number"
-            onChange={event => setPace(event.target.value)}
-            value={pace}
-          /> <br/>
-          Writing Style: <input 
-            id="writing-style"
-            name="writing-style"
-            type="number"
-            onChange={event => setWritingStyle(event.target.value)}
-            value={writingStyle}
-            required
-          /> <br/>
-          Ending: <input 
-            id="ending"
-            name="ending"
-            type="number"
-            onChange={event => setEnding(event.target.value)}
-            value={ending}
-            required
-          /> <br/>
-          Overall Enjoyability: <input 
-            id="overall_enjoyability"
-            name="overall_enjoyability"
-            type="number"
-            onChange={event => setOverallEnjoyability(event.target.value)}
-            value={overallEnjoyability}
-            required
-          />
-        </div>
-        Tags:<input 
-          id="tags"
-          name="tag"
-          type="text"
-          onChange={event => setTags(event.target.value)}
-          value={tags}
-          placeholder="Separate tags with commas (i.e. fiction, romance, etc)"
-          required
-        /> <br/>
-        <button type="submit">Submit form</button>
-      </form>
-    </div>
-
-*/
 export default CreatePost;
