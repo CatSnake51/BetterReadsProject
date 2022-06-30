@@ -1,4 +1,4 @@
-import React from 'React';
+import React from 'react';
 /* 
 Component for Review Inputs
 There is a lot of things to fill out so I modularize it.
