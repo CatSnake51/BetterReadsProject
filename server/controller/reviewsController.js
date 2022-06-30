@@ -6,8 +6,17 @@ const reviewsController = {};
 // Gets all reviews from the database
 reviewsController.getReviews = async (req, res, next) => {
   try {
-    const data =  await db.query('SELECT review.*, book.name, book.author from review INNER JOIN book ON review.book_id = book.book_id')
-    res.locals.reviews = data.rows
+    const reviewData =  await db.query(`
+    SELECT review.*, book.name, book.author, string_agg(tag.name, ',') AS tags
+    FROM review 
+    INNER JOIN book ON review.book_id = book.book_id
+    LEFT OUTER JOIN review_tag_link ON review.review_id = review_tag_link.review_id
+    LEFT OUTER JOIN tag ON review_tag_link.tag_id = tag.tag_id
+    GROUP BY review.review_id, book.name, book.author
+    `)
+ 
+  
+    res.locals.reviews = reviewData.rows
     return next()
   } catch(err) {
     console.log(err)

@@ -23,11 +23,19 @@ const MainContainer = () => {
     };
     fetchData();
   }, []);
+
+  const handleDelete = (id) => {
+    setData(
+      data.filter((post) => {
+        return post.review_id !== id;
+      })
+    );
+  };
   // console.log(data);
   return (
     <div id="main-container">
       <CreatePost />
-      <RenderFeed posts={data} />
+      <RenderFeed posts={data} handleDelete={handleDelete} />
     </div>
   );
 };
