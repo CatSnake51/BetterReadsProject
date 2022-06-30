@@ -1,7 +1,11 @@
 import React from 'React';
+import { unmountComponentAtNode } from "react-dom";
 import { Provider } from 'react-redux';
 import userEvent from '@testing-library/user-event'
 import { render, screen, waitFor } from '@testing-library/react';
+
+import CreatePost from './CreatePost.jsx';
+import RevInputs from './RevInputs.jsx';
 
 describe('Testing component CreatePost', () => {
 
