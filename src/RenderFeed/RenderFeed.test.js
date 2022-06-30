@@ -1,4 +1,4 @@
-import RenderFeed from './RenderFeed';
+import RenderFeed from './RenderFeed.jsx';
 import userEvent from '@testing-library/user-event';
 import { render, screen, waitFor } from '@testing-library/react';
 import regeneratorRunTime from 'regenerator-runtime';

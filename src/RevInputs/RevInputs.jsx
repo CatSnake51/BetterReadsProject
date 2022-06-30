@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 
+import './RevInputs.css'
+
 /* 
 Component for Review Inputs
 There is a lot of things to fill out so I modularize it.
@@ -17,8 +19,11 @@ const RevInputs = ({
   value
 }) => {
   return (
+    <div>
     <label>
-      {name.split('-').join(' ') + ' :'}
+    {name.split('-').join(' ') + ' :'}
+    </label>
+      
       <input
         id={'submit' + name}
         name={name}
@@ -27,7 +32,7 @@ const RevInputs = ({
         value={value}
         required
       />
-    </label>
+      </div>
   );
 };
 
