@@ -6,10 +6,11 @@ const reviewsController = {};
 // Gets all reviews from the database
 reviewsController.getReviews = async (req, res, next) => {
   try {
-    const data =  await db.query('SELECT * from review')
+    const data =  await db.query('SELECT review.*, book.name, book.author from review INNER JOIN book ON review.book_id = book.book_id')
     res.locals.reviews = data.rows
     return next()
   } catch(err) {
+    console.log(err)
     return next(err);
   }
 }
@@ -19,7 +20,7 @@ reviewsController.postReviews = async (req, res, next) => {
   const { comments, plotline, unpredictability, 
     pace, writing_style, ending, overall } = req.body
   try {
-    if (!comments || !plotline || !unpredictability || !pace || !writing_style || !ending || !overall) return next({ log: 'Invalid body' })
+    if (!comments || !plotline || !unpredictability || !pace || !writing_style || !ending || !overall) return next({ message: {err: 'Invalid review information in body'} })
     const data = await db.query(`
     INSERT INTO review (book_id, comments, plotline, unpredictability, pace, writing_style, ending, overall)  
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
@@ -29,7 +30,23 @@ reviewsController.postReviews = async (req, res, next) => {
     return next()
   } catch(err) {
     console.log(err)
-    return next(err)
+    return next({message: err})
+  }
+}
+
+// Deletes a review from the database
+reviewsController.deleteReviews = async (req, res, next) => {
+  try {
+    const data = await db.query(`
+    DELETE FROM review 
+    WHERE review_id = $1
+    RETURNING *
+    `, [req.params.reviewId])
+    if (!data.rowCount) return next({log:'Review not found', message: {err: 'Review is not found'}})
+    return next()
+  } catch(err) {
+    console.log(err)
+    return next({message: 'Error in Review'})
   }
 }
 
