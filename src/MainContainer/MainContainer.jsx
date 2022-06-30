@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import CreatePost from '../CreatePost/CreatePost.jsx';
 import RenderFeed from '../RenderFeed/RenderFeed.jsx';
 import axios from 'axios';
+import './MainContainer.css'
 // import { async } from 'regenerator-runtime';
 
 //write a function that takes an obj of post setData passing in the data object with current post obj

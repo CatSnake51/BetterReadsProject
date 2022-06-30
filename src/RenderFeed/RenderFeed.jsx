@@ -1,5 +1,6 @@
 import React from 'react';
 import Posts from '../Posts/Posts.jsx';
+import './RenderFeed.css'
 
 //REMINDER:  -> make GET request in MainContainer and pass data as props to here
 //TODO: Delete test data and if data isn't in an array, store it in one to iterate over and pass as prop to Posts component
@@ -13,7 +14,7 @@ const RenderFeed = ({ posts }) => {
     );
   });
 
-  return <>{postArr}</>;
+  return <div className="post-container">{postArr}</div>;
 };
 
 export default RenderFeed;
