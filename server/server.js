@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 
 const reviewsRouter = require('./routes/reviewsRouter')
+const tagsRouter = require('./routes/tagsRouter')
 
 const app = express();
 const port = 3000;
@@ -11,6 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 
 app.use('/api/reviews', reviewsRouter); 
+app.use('/api/tags', tagsRouter)
 
 // send index.html file to base endpoint
 app.use(express.static(path.resolve(__dirname, '../dist')));
