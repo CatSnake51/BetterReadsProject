@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types'
 
 //TODO: make sure that the value matches with data received from database
-const Posts = ({ post }) => {
+const Post = ({ post }) => {
   // console.log('POSTS', post);
   return (
     <div className="render-feed">
@@ -27,7 +27,7 @@ const Posts = ({ post }) => {
   );
 };
 
-Posts.propTypes = {
+Post.propTypes = {
   /** Information about the post */
   post: PropTypes.shape({
     /** Name of book */
@@ -51,4 +51,4 @@ Posts.propTypes = {
   })
 }
 
-export default Posts;
+export default Post;
