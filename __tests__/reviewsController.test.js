@@ -4,7 +4,7 @@ const server = 'http://localhost:3000'
 
 const conditionalBruteForce = {}
 
-describe('/api/reviews', () => {
+xdescribe('/api/reviews', () => {
   describe('GET', () => {
     //it has json in the reviewRouter
     it('sends back response', () => {
@@ -81,42 +81,45 @@ describe('/api/reviews', () => {
 })
 
 
-describe('/api/reviews/:reviewId', () => {
+xdescribe('/api/reviews/:reviewId', () => {
 
   describe('DELETE', () => {
 
-    it('returns an error if review_id is not found', async () => {
-      let res = await request(server)
-        //test for an id that doesnt exist
-        .delete('/api/reviews/-1')
-        .expect('Content-Type', /application\/json/)
-        .expect(400)
-      expect(res.body).toEqual({ err: 'Review is not found' })
-    })
+    describe('DELETE', () => {
 
-    it('returns a successful response when deleted', async () => {
-      let data = {
-        name: "The BFG",
-        author: 'Ronald Dahl',
-        comments: 'Made from testing file',
-        plotline: 8,
-        unpredictability: 4,
-        pace: 9,
-        writing_style: 2,
-        ending: 1,
-        overall: 6
-      }
+      it('returns an error if review_id is not found', async () => {
+        let res = await request(server)
+          //test for an id that doesnt exist
+          .delete('/api/reviews/-1')
+          .expect('Content-Type', /application\/json/)
+          .expect(400)
+        expect(res.body).toEqual({ err: 'Review is not found' })
+      })
 
-      //Makes a new row in reviews
-      let postRes = await request(server)
-        .post('/api/reviews')
-        .send(data)
-      //Deletes the recently created row from reviews
-      let res = await request(server)
-        .delete(`/api/reviews/${postRes.body.review_id}`)
-        .expect('Content-Type', /application\/json/)
-        .expect(200)
-      expect(res.body).toEqual({ message: 'Successful deletion' })
+      it('returns a successful response when deleted', async () => {
+        let data = {
+          name: "The BFG",
+          author: 'Ronald Dahl',
+          comments: 'Made from testing file',
+          plotline: 8,
+          unpredictability: 4,
+          pace: 9,
+          writing_style: 2,
+          ending: 1,
+          overall: 6
+        }
+
+        //Makes a new row in reviews
+        let postRes = await request(server)
+          .post('/api/reviews')
+          .send(data)
+        //Deletes the recently created row from reviews
+        let res = await request(server)
+          .delete(`/api/reviews/${postRes.body.review_id}`)
+          .expect('Content-Type', /application\/json/)
+          .expect(200)
+        expect(res.body).toEqual({ message: 'Successful deletion' })
+      })
     })
   })
-})
+}) 
