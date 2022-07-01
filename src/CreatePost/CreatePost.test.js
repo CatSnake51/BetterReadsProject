@@ -7,13 +7,13 @@ import { render, screen, waitFor } from '@testing-library/react';
 import CreatePost from './CreatePost.jsx';
 import RevInputs from './RevInputs.jsx';
 
-describe('Testing component CreatePost', () => {
+xdescribe('Testing component CreatePost', () => {
 
   //render the compoenent to test it
   beforeAll(() => {
-    const create = render(<CreatePost/>)
-    
-  }); 
+    const create = render(<CreatePost />)
+
+  });
 
   afterEach(() => {
     create = null;
@@ -47,7 +47,7 @@ describe('Testing component CreatePost', () => {
   })
 
   xit('Check if it has options for tags', () => {
-    
+
   })
 
   xit('test that post request is sending the right info', async () => {

@@ -8,7 +8,7 @@ tagsController.getTags = async (req, res, next) => {
     res.locals.tags = data.rows
     return next()
   } catch (err) {
-    return next(err)
+    return next({ message: err })
   }
 }
 
@@ -23,7 +23,8 @@ tagsController.postTags = async (req, res, next) => {
     res.locals.tags = data.rows[0]
     return next()
   } catch (err) {
-    return next(err)
+    console.log(err)
+    return next({ message: err })
   }
 }
 

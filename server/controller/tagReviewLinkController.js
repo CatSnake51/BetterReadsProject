@@ -7,8 +7,9 @@ tagReviewLinkController.postTagReview = async (req, res, next) => {
   const { tags } = req.body
   const { review_id } = res.locals.postedReviews
   try {
+    if (!tags) return next()
     const data = []
-    for (let i = 0; i < tags.length; i++){
+    for (let i = 0; i < tags.length; i++) {
       const row = await db.query(`
       INSERT INTO review_tag_link (review_id, tag_id)
       VAlUES ($1, $2)
@@ -20,7 +21,7 @@ tagReviewLinkController.postTagReview = async (req, res, next) => {
     return next()
   } catch (err) {
     console.log(err)
-    return next(err)
+    return next({ message: err })
   }
 }
 

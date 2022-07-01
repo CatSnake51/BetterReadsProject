@@ -13,19 +13,19 @@ xdescribe('/api/reviews', () => {
         .expect('Content-Type', /application\/json/)
         .expect(200)
     })
-      it('sends back an array', async () => {
+    it('sends back an array', async () => {
       const res = await request(server)
         .get('/api/reviews')
-        expect(Array.isArray(res.body)).toEqual(true)
-    }) 
+      expect(Array.isArray(res.body)).toEqual(true)
+    })
   })
-  
+
   describe('POST', () => {
-    let data 
-    beforeEach(()=> {
+    let data
+    beforeEach(() => {
       data = {
-        name: "The BFG", 
-        author: 'Ronald Dahl', 
+        name: "The BFG",
+        author: 'Ronald Dahl',
         comments: 'Made from testing file',
         plotline: 8,
         unpredictability: 4,
@@ -35,7 +35,7 @@ xdescribe('/api/reviews', () => {
         overall: 6
       }
     })
-    
+
     it('sends an object on successful response with existing author', async () => {
       const res = await request(server)
         .post('/api/reviews')
@@ -45,8 +45,9 @@ xdescribe('/api/reviews', () => {
       expect(res.body).toBeInstanceOf(Object)
       delete data.name
       delete data.author
+      console.log(res.body)
       expect(res.body).toMatchObject(data)
-      
+
     })
 
     //TODO write route for deleting books
@@ -54,18 +55,18 @@ xdescribe('/api/reviews', () => {
       data.name = 'Test Name'
       data.author = 'Test Author'
     })
-    
+
     it('sends an error when name or author input is invalid', async () => {
-      delete data.name 
+      delete data.name
       delete data.author
       let res = await request(server)
         .post('/api/reviews')
         .send(data)
         .expect('Content-Type', /application\/json/)
         .expect(400)
-      expect(res.body).toEqual({err: "Invalid author or name supplied in body"})
+      expect(res.body).toEqual({ err: "Invalid author or name supplied in body" })
     })
-    
+
     it('sends an error when review info is not sent in the body', async () => {
       delete data.plotline
       delete data.pace
@@ -74,26 +75,28 @@ xdescribe('/api/reviews', () => {
         .send(data)
         .expect('Content-Type', /application\/json/)
         .expect(400)
-      expect(res.body).toEqual({err: 'Invalid review information in body'})
+      expect(res.body).toEqual({ err: 'Invalid review information in body' })
     })
-})
+  })
 })
 
 
 xdescribe('/api/reviews/:reviewId', () => {
-   
-   describe('DELETE', () => {
 
-     it('returns an error if review_id is not found', async () => {
-      let res = await request(server)
-      //test for an id that doesnt exist
-      .delete('/api/reviews/-1')
-        .expect('Content-Type', /application\/json/)
-        .expect(400)
-      expect(res.body).toEqual({err: 'Review is not found'})
-     })
+  describe('DELETE', () => {
 
-     it('returns a successful response when deleted', async () => {
+    describe('DELETE', () => {
+
+      it('returns an error if review_id is not found', async () => {
+        let res = await request(server)
+          //test for an id that doesnt exist
+          .delete('/api/reviews/-1')
+          .expect('Content-Type', /application\/json/)
+          .expect(400)
+        expect(res.body).toEqual({ err: 'Review is not found' })
+      })
+
+      it('returns a successful response when deleted', async () => {
         let data = {
           name: "The BFG",
           author: 'Ronald Dahl',
@@ -105,8 +108,8 @@ xdescribe('/api/reviews/:reviewId', () => {
           ending: 1,
           overall: 6
         }
-       
-       //Makes a new row in reviews
+
+        //Makes a new row in reviews
         let postRes = await request(server)
           .post('/api/reviews')
           .send(data)
@@ -116,6 +119,7 @@ xdescribe('/api/reviews/:reviewId', () => {
           .expect('Content-Type', /application\/json/)
           .expect(200)
         expect(res.body).toEqual({ message: 'Successful deletion' })
-     })
-   })
-})
+      })
+    })
+  })
+}) 
