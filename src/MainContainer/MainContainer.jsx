@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import CreatePost from '../CreatePost/CreatePost.jsx';
 import RenderFeed from '../RenderFeed/RenderFeed.jsx';
 import axios from 'axios';
+
 import './MainContainer.css'
+import logo from '../../images/bettererreads.png'
 // import { async } from 'regenerator-runtime';
 
 //write a function that takes an obj of post setData passing in the data object with current post obj
@@ -34,6 +36,7 @@ const MainContainer = () => {
   // console.log(data);
   return (
     <div id="main-container">
+      <img className='logo' src={logo} />
       <CreatePost />
       <RenderFeed posts={data} handleDelete={handleDelete} />
     </div>
