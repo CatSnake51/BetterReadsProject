@@ -1,0 +1,22 @@
+#post-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.review-header {
+  margin-bottom: 10px;
+}
+
+.tags {
+  display: flex;
+  flex-direction: row;
+}
+
+.ratings {
+  border-bottom: 2px solid rgb(87, 85, 85);
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  width: 300px;
+  text-align: center;
+}
